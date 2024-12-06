@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "899869170901",
+    "project_id": "tatsklisttapp",
+    "storage_bucket": "tatsklisttapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899869170901:android:c059d6706cd8206290965c",
+        "android_client_info": {
+          "package_name": "com.example.task_list_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899869170901-sdkurn751vaho3scqs5s54ns3g4mtbl6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.task_list_app",
+            "certificate_hash": "3211f684e9b29c87ab56f20d9fc2324d8d3e892f"
+          }
+        },
+        {
+          "client_id": "899869170901-ntoqec1aub4qdo2gthgdd8qopa8vhlmj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwc9dyk6CSZ3V4owC6JOFJG_fSibshXLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899869170901-ntoqec1aub4qdo2gthgdd8qopa8vhlmj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
