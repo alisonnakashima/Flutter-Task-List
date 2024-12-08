@@ -37,6 +37,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Task'),
@@ -58,8 +61,16 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             ),
             const Spacer(),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: theme.appBarTheme.backgroundColor,
+                foregroundColor: theme.appBarTheme.foregroundColor
+              ),
               onPressed: _saveTask,
-              child: const Text('Save Task'),
+              child: const Text('Save Task',
+                style: TextStyle(
+                  fontSize: 16.0
+                ),
+              ),
             ),
           ],
         ),

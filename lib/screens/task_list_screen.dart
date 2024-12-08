@@ -41,9 +41,20 @@ class _TaskListScreenState extends State<TaskListScreen> {
             ),
             onPressed: taskProvider.toggleTheme,
           ),
+          IconButton(
+            icon: const Icon(
+              Icons.logout
+            ),
+            onPressed: (){
+              Provider.of<TaskProvider>(context, listen: false).logout(context);
+            },
+          )
         ],
       ),
-      body: RefreshIndicator(
+      body: taskProvider.isLoading ? const Center(
+        child: CircularProgressIndicator(), // Exibe indicador de carregamento
+      )
+      : RefreshIndicator(
         onRefresh: LoadTasks, // Função de carregamento ao arrastar
         child: Consumer<TaskProvider>(
           builder: (context, taskProvider, child) {
@@ -90,20 +101,36 @@ class _TaskListScreenState extends State<TaskListScreen> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: theme.appBarTheme.backgroundColor,
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => const AddTaskScreen(),
-            ),
+              ),
           );
         },
-        child: Icon(
-          Icons.add,
-          color: theme.appBarTheme.foregroundColor,
-        ),
+        label: Text('Adicionar'), // Texto do botão
+        icon: Icon(Icons.add),    // Ícone do botão
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        foregroundColor: theme.appBarTheme.foregroundColor,// Cor de fundo
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat, // Localização do FAB
+
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: theme.appBarTheme.backgroundColor,
+      //   onPressed: () {
+      //     Navigator.of(context).push(
+      //       MaterialPageRoute(
+      //         builder: (context) => const AddTaskScreen(),
+      //       ),
+      //     );
+      //   },
+      //   child: Icon(
+      //     Icons.add,
+      //     color: theme.appBarTheme.foregroundColor,
+      //   ),
+      // ),
+
     );
   }
 }

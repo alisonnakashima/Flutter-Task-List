@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:task_list_app/screens/welcome_screen.dart';
 import 'package:task_list_app/services/api_service.dart';
 import 'package:task_list_app/services/local_storage_service.dart';
 import '../models/task.dart';
@@ -11,6 +13,9 @@ class TaskProvider extends ChangeNotifier {
 
   List<Task> get tasks => List.unmodifiable(_tasks);
   bool get isDarkTheme => _isDarkTheme;
+
+  bool _isLoading = false; // Indica se está carregando tarefas
+  bool get isLoading => _isLoading; // Getter para acesso externo
 
   void addTask(String title, String description) async {
     final newTask = Task(
@@ -28,7 +33,10 @@ class TaskProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void loadTasks() async {
+  Future<void> loadTasks() async {
+    _isLoading = true;
+    notifyListeners();
+
     final savedTasks;
     try {
       savedTasks = await ApiService().fetchTasks();
@@ -43,6 +51,7 @@ class TaskProvider extends ChangeNotifier {
       _tasks.addAll(savedTasks.map((taskJson) => Task.fromJson(taskJson)));
       print(savedTasks);
     }
+    _isLoading = false;
     notifyListeners();
   }
 
@@ -72,5 +81,19 @@ class TaskProvider extends ChangeNotifier {
   void toggleTheme() {
     _isDarkTheme = !_isDarkTheme;
     notifyListeners();
+  }
+
+  Future<void> logout(context) async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => WelcomeScreen()),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Falha ao executar o logout: $e')),
+      );
+    }
+    FirebaseAuth.instance.signOut();
   }
 }

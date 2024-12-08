@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'task_list_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,14 +35,26 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 32.0),
-              Text(
-                'Task List App',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: theme.appBarTheme.backgroundColor,
-                  fontSize: 36.0,
-                  fontWeight: FontWeight.bold,
-                ),
+              AnimatedTextKit(
+                animatedTexts: [
+                  ColorizeAnimatedText(
+                    speed: const Duration(milliseconds: 1000),
+                    'Task List App',
+                    textAlign: TextAlign.center,
+                    textStyle: const TextStyle(
+                      fontSize: 36.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    colors: [
+                      Colors.blue,
+                      Colors.green,
+                      Colors.orange,
+                      Colors.purple,
+                    ],
+                  ),
+                ],
+                repeatForever: true,
+                isRepeatingAnimation: true,
               ),
               const SizedBox(height: 16.0),
               const Text(

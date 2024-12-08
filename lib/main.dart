@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:task_list_app/screens/task_list_screen.dart';
 import 'providers/task_provider.dart';
 import 'screens/welcome_screen.dart';
 import 'themes/app_theme.dart';
@@ -32,6 +33,11 @@ class _TaskAppState extends State<TaskApp> {
       child: Consumer<TaskProvider>(
         builder: (context, taskProvider, child) {
           return MaterialApp(
+            initialRoute: '/welcome',
+            routes: {
+              '/welcome': (context) => WelcomeScreen(),
+              '/home': (context) => TaskListScreen(),
+            },
             debugShowCheckedModeBanner: false,
             theme: taskProvider.isDarkTheme
                 ? AppTheme.darkTheme
