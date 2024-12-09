@@ -20,18 +20,18 @@ lembrando que as APIs fornecem as mesmas configurações, foram criadas duas poi
 HTTP Method	Rest API Path
 GET	https://mpb25628e1e09afd24fd.free.beeceptor.com/tasks
 GET	https://mpb25628e1e09afd24fd.free.beeceptor.com/tasks/:id
-POST	https://mpb25628e1e09afd24fd.free.beeceptor.com/tasks
+POST https://mpb25628e1e09afd24fd.free.beeceptor.com/tasks
 PUT	https://mpb25628e1e09afd24fd.free.beeceptor.com/tasks/:id
-PATCH	https://mpb25628e1e09afd24fd.free.beeceptor.com/tasks/:id
-DELETE	https://mpb25628e1e09afd24fd.free.beeceptor.com/tasks/:id
+PATCH https://mpb25628e1e09afd24fd.free.beeceptor.com/tasks/:id
+DELETE https://mpb25628e1e09afd24fd.free.beeceptor.com/tasks/:id
 
 
 HTTP Method	Rest API Path
 GET	https://flutter-task-list.free.beeceptor.com/tasks
 GET	https://flutter-task-list.free.beeceptor.com/tasks/:id
-POST	https://flutter-task-list.free.beeceptor.com/tasks
+POST https://flutter-task-list.free.beeceptor.com/tasks
 PUT	https://flutter-task-list.free.beeceptor.com/tasks/:id
-PATCH	https://flutter-task-list.free.beeceptor.com/tasks/:id
-DELETE	https://flutter-task-list.free.beeceptor.com/tasks/:id
+PATCH https://flutter-task-list.free.beeceptor.com/tasks/:id
+DELETE https://flutter-task-list.free.beeceptor.com/tasks/:id
 
 OBS: acesso de usuário é único e não há separação entre os dados da API para cada usuário. 
