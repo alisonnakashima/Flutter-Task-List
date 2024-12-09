@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:task_list_app/screens/welcome_screen.dart';
 import 'package:task_list_app/services/api_service.dart';
 import 'package:task_list_app/services/local_storage_service.dart';
+import 'package:task_list_app/platform/battery_channel.dart';
 import '../models/task.dart';
 
 class TaskProvider extends ChangeNotifier {
@@ -10,6 +12,7 @@ class TaskProvider extends ChangeNotifier {
   final localStorageService = LocalStorageService();
   final apiService = ApiService();
   bool _isDarkTheme = false;
+  static const MethodChannel platform = MethodChannel('battery');
 
   List<Task> get tasks => List.unmodifiable(_tasks);
   bool get isDarkTheme => _isDarkTheme;
@@ -96,4 +99,51 @@ class TaskProvider extends ChangeNotifier {
     }
     FirebaseAuth.instance.signOut();
   }
+
+  Future <void> getBatteryLevel(BuildContext context) async {
+    try {
+      final batteryLevel = await BatteryChannel.getBatteryLevel();
+
+      if (batteryLevel != null && batteryLevel >= 0) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Nível de bateria atual: $batteryLevel%",
+              style: TextStyle(
+                fontSize: 16.0,
+              ),
+            ),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Não foi possível obter o nível de bateria.",
+              style: TextStyle(
+                fontSize: 16.0
+              ),
+            ),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "Erro ao obter nível de bateria: $e",
+            style: const TextStyle(
+              color: Colors.red,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+// return await BatteryChannel.getBatteryLevel();
+
+
 }
